@@ -1,13 +1,26 @@
 set ai ts=2 sw=2 et
+set guifont=Menlo-Regular:h19
 set nospell " spell spelllang=en_us
 set spell spelllang=en_us
+
+"My stuff.  (^[ is the literal ESC char)
+let @t='a{:target="_blank"}'
+let @b='i`Ea`'
+set syn=
+
+set hlsearch
 colorscheme desert
+
+
 " Vim modes: (n)ormal, (i)nsert, (v)isual, (s)elect, (c)ommand, (o)perator-pending
 " (v actually represents visual-and-select, while x represents visual-only)
 "
 " Escape from insert mode w/o leaving home row.
 inoremap jk <ESC>
 inoremap kj <ESC>
+
+" From insert mode, use tab to cycle to through autocomplete choices
+inoremap <Tab> <C-N>
 nmap =j :%!python -m json.tool<CR>
 
 " Hit 'zx' to insert the current date/time while in insert or command-line mode
@@ -37,11 +50,11 @@ nnoremap <leader>z 1z=
 "
 " You can also enable loading a plugin for specific file types, and also
 " the indent file for specific file types.  This command switches them
-" all on ...
-filetype plugin indent on
+" all on.  NOTE: It overrides your shiftwidth, tabstop, etc settings!
+" filetype plugin indent on
 
 " Switch on syntax highlighting
-syntax on
+"syntax on
 
 "
 set encoding=utf-8
@@ -51,6 +64,12 @@ set encoding=utf-8
 " to Vim's paste buffer.
 " NOTE: Your vim distro needs to be compiled with clipboard support.  Check
 " for "+clipboard" in the output of "vim --version".
-set clipboard=unnamedplus
+" NOTE: setting clipboard='unnamedplus' will break yy !!
+" set clipboard=unnamedplus
+set clipboard=unnamed
 
-
+" Autosave work when editing pauses.  (I've commented this out for now 'cause it
+" doesn't handle new vim buffers cleanly.)
+"
+" autocmd TextChanged,TextChangedI * silent write
+"
